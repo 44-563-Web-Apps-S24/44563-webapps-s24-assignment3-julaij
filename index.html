@@ -77,6 +77,41 @@
             <td>Twenty One Pilots</td>
         </tr>
     </table>
-</body>
+    <hr>
+    <h3>Code Fencing</h3>
+    <p>
+        In strict assertion mode, non-strict methods behave like their corresponding strict methods.
+        For example, assert.deepEqual() will behave like assert.deepStrictEqual().
 
+        In strict assertion mode, error messages for objects display a diff.
+        In legacy assertion mode, error messages for objects display the objects, often truncated.
+    </p>
+    <a href="https://nodejs.org/api/assert.html">source code link</a>
+    <pre>
+        <code>
+            const assert = require('node:assert');
+
+            // Generate an AssertionError to compare the error message later:
+            const { message } = new assert.AssertionError({
+            actual: 1,
+            expected: 2,
+            operator: 'strictEqual',
+            });
+
+            // Verify error output:
+            try {
+            assert.strictEqual(1, 2);
+            } catch (err) {
+            assert(err instanceof assert.AssertionError);
+            assert.strictEqual(err.message, message);
+            assert.strictEqual(err.name, 'AssertionError');
+            assert.strictEqual(err.actual, 1);
+            assert.strictEqual(err.expected, 2);
+            assert.strictEqual(err.code, 'ERR_ASSERTION');
+            assert.strictEqual(err.operator, 'strictEqual');
+            assert.strictEqual(err.generatedMessage, true);
+            }
+        </code>        
+    </pre>
+</body>
 </html>
